@@ -48,7 +48,7 @@ func (sMgr *StudentMgr) modifyStudent(student *Student) {
 	for index, stu := range sMgr.allStudent {
 		if stu.id == student.id {
 			sMgr.allStudent[index] = student
-			fmt.Println("修改成功", sMgr.allStudent, student)
+			fmt.Println("修改成功")
 			return
 		}
 	}

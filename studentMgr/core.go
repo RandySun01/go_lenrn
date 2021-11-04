@@ -53,19 +53,21 @@ func Run() {
 		fmt.Scanf("%d\n", &choice)
 		switch choice {
 		case 1:
+			// 添加信息
 			stu := inputStudentInfo()
 			stuMgr.addStudent(stu)
 		case 2:
-
+			// 修改学生信息
 			stuMgr.showStudent()
 			stu := inputStudentInfo()
 			stuMgr.modifyStudent(stu)
 		case 3:
-
+			// 删除信息
 			stuMgr.showStudent()
 			id := inputStudentId()
 			stuMgr.deleteStudent(id)
 		case 4:
+			// 展示学生信息
 			stuMgr.showStudent()
 		default:
 			fmt.Println("请选择已有功能")
