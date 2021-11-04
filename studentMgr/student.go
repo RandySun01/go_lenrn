@@ -21,6 +21,7 @@ type StudentMgr struct {
 	allStudent []*Student
 }
 
+// 初始化
 func NewStudentMgr() *StudentMgr {
 	return &StudentMgr{
 		allStudent: make([]*Student, 0, 10),
@@ -28,6 +29,7 @@ func NewStudentMgr() *StudentMgr {
 
 }
 
+// 添加学生
 func (sMgr *StudentMgr) addStudent(student *Student) {
 	// StudentMgr要定义指针接收者
 	for _, stu := range sMgr.allStudent {
@@ -37,9 +39,10 @@ func (sMgr *StudentMgr) addStudent(student *Student) {
 		}
 	}
 	sMgr.allStudent = append(sMgr.allStudent, student)
-	fmt.Println("添加成功", sMgr.allStudent, student)
+	fmt.Println("添加成功")
 }
 
+// 修改学生
 func (sMgr *StudentMgr) modifyStudent(student *Student) {
 	// StudentMgr要定义指针接收者
 	for index, stu := range sMgr.allStudent {
@@ -51,6 +54,8 @@ func (sMgr *StudentMgr) modifyStudent(student *Student) {
 	}
 	fmt.Println("学生信息不存在,请添加学员信息")
 }
+
+// 删除学生
 func (sMgr *StudentMgr) deleteStudent(id int) {
 	if len(sMgr.allStudent) == 0 {
 		fmt.Println("学员信息为空")
@@ -75,6 +80,6 @@ func (sMgr StudentMgr) showStudent() {
 		return
 	}
 	for _, stu := range sMgr.allStudent {
-		fmt.Printf("学生编号: %d 学生姓名: %s 学生班级: %s\n ", stu.id, stu.name, stu.class)
+		fmt.Printf("学生编号: %d 学生姓名: %s 学生班级: %s\n", stu.id, stu.name, stu.class)
 	}
 }
