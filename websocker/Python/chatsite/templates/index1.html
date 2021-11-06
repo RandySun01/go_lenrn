@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>websocket通信</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+</head>
+<body>
+<button id="btn">点我连接</button>
+<hr>
+请输入：<input type="text" id="chat-message-input">
+<button id="chat-message-submit">发送</button>
+<hr>
+通信内容：
+<br>
+<textarea id="chat-log" cols="30" rows="10"></textarea>
+</body>
+<script>
+    var chatSocket
+    $('#btn').click(function () {
+        chatSocket = new WebSocket('ws://127.0.0.1:8000');
+
+        chatSocket.onmessage = function (e) {
+            console.log(e)
+            var data = JSON.parse(e.data);
+
+            var message = data['message'];
+            console.log(message)
+            var datamsg = $('#chat-log').val() + message + '\n'
+            $('#chat-log').val(datamsg)
+        };
+
+        chatSocket.onclose = function (e) {
+            console.error(e);
+        };
+
+    })
+
+    $('#chat-message-submit').click(function () {
+        console.log(chatSocket.readyState)
+        if (chatSocket.readyState === 1) {
+            var message = $('#chat-message-input').val()
+            chatSocket.send(JSON.stringify({
+                'message': message
+            }));
+            $('#chat-message-input').val("")
+        } else {
+            console.log("还没有连接")
+        }
+
+
+    })
+</script>
+</html>

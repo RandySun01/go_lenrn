@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<h1>聊天室: <span id="d3">{{ name }}</span></h1>
+<div>
+    <input type="text" name="content" id="d1">
+    <button id="d2">发送</button>
+</div>
+<h1>聊天纪录</h1>
+<div class="record">
+
+</div>
+
+<script>
+    // 朝后端发送用户消息
+    $('#d2').click(function () {
+        $.ajax({
+            url: '/send_msg/',
+            type: 'post',
+            data: {
+                'content': $("#d1").val(),
+                'name': $("#d3").text(),
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            {#dataType:"JSON",#}
+            success: function (args) {
+
+            }
+        })
+    });
+
+    // 书写偷偷跟服务端要数据的代码
+    function getMsg() {
+        $.ajax({
+            url: '/get_msg/',
+            type: 'get',
+            data: {'name': '{{ name }}'},
+            {#dataType:"JSON",#}
+            success: function (args) {
+                if (args.status) {
+                    // 有消息 应该DOM操作渲染到页面上
+                    // 1 创建标签
+                    var pEle = $('<p>');
+                    // 2 给标签添加文本内容
+                    pEle.text(args.msg.name +" : "+ args.msg.content);
+                    // 3 添加到div中
+                    $('.record').append(pEle)
+                } else {
+                    // 没有则继续发送
+                }
+                getMsg()
+            }
+        })
+    }
+
+    // 页面加载完毕之后自动触发getMsg函数的执行
+    $(function () {  // 等待页面加载完毕之后自动调用getMsg函数
+        getMsg()
+    })
+</script>
+
+</body>
+</html>
