@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	
+</head>
+<body>
+<div id="content">
+
+</div>
+<script>
+   let test = document.getElementById('content');
+   var sc = document.createElement("script");
+   sc.type = "text/javascript";
+   sc.setAttribute("src", "//www.smucdn.com/smu0/o.js");
+   sc.setAttribute("smua", "d=m&s=b&u=u4173690&h=330");
+    var divs = document.createElement("div");
+    divs.setAttribute("style", ";margin-left: 10px;margin-right: 10px");
+    divs.setAttribute("class", "new_ad");
+    divs.setAttribute("id", "btn");
+    divs.appendChild(sc);
+
+    var div_bottom = document.createElement("div");
+    divs.appendChild(div_bottom);
+    test.appendChild(divs);
+</script>
+</body>
+</html>
