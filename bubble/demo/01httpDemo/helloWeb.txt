@@ -1,0 +1,10 @@
+<h1 style="color:red">hello web</h1>
+<h2>hello web</h2>
+<img id="randy" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2F1114%2F0512210S939%2F2105120S939-12-1200.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1638976149&t=ab8df8adcb0ce26f03170766e7744d94">
+
+<button id="sun">点我</button>
+<script>
+   document.getElementById("sun").onclick=function(){
+        document.getElementById("randy").src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2F12%2F1f%2Fa0%2F121fa0f4730a034237c13b7595db3a16.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1638976181&t=125bfc28da1fb97e6fe5e179fdead261"
+   }
+</script>
