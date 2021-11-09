@@ -19,7 +19,7 @@ func sayHello(w http.ResponseWriter, r *http.Request) {
 
 func sayHelloFile(w http.ResponseWriter, r *http.Request) {
 
-	b, _ := ioutil.ReadFile("G:\\goproject\\go\\bubble\\demo\\01httpTest\\helloWeb.txt")
+	b, _ := ioutil.ReadFile("G:\\goproject\\go\\bubble\\demo\\01httpDemo\\helloWeb.txt")
 	a, _ := fmt.Fprintln(w, string(b))
 	fmt.Println(a)
 
