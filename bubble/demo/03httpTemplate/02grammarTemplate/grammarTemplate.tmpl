@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hello Template</title>
+</head>
+
+
+结构体
+{{/*<p>userInfo:  {{.}} 注释信息 </p>*/}}
+<p>name: {{.u.Name}}</p>
+<p>age: {{.u.Age}}</p>
+<p>gender: {{.u.Gender}}</p>
+<hr>
+map
+<p>map: {{.}}</p>
+<p>name: {{.m.name}}</p>
+<p>age: {{.m.age}}</p>
+<p>gender: {{.m.gender}}</p>
+<hr>
+
+{{$varObj :=.m.age}}
+<p>变量赋值varObj:{{$varObj}}</p>
+<hr>
+条件判断和比较函数 <br>
+{{if lt .m.age 23}}
+    <span style="color: #d21414">去上学吧,你不配打工人</span>
+{{else if gt 23}}
+    打工人
+{{end}}
+<hr>
+
+range使用 <br>
+{{range $k, $v := .}}
+    key:&nbsp&nbsp{{$k}} &nbsp&nbsp value:&nbsp&nbsp{{$v}} <br>
+{{else}}
+    空空如也,真穷啥也不给我
+{{end}}
+<hr>
+with局部作用域 <br>
+{{with .m}}
+    <p>name: {{.name}}</p>
+    <p>age: {{.age}}</p>
+    <p>gender: {{.gender}}</p>
+{{else}}
+    空空如也,真穷啥也不给我
+{{end}}
+
+<hr>
+
+
+{{len .m}} <br>
+
+{{index .s 2}} <br>
+</html>
