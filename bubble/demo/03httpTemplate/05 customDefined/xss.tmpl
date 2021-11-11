@@ -7,6 +7,9 @@
     <title>Hello Template</title>
 </head>
 <body>
-<p>hello {[.]}</p>
+{{/*<p>用户的评论是:{{.}}</p>*/}}
+{{/*<p>用户的评论是:{{.}}</p>*/}}
+<p>用户的评论是:{{.str1 | safe}}</p>
+<p>博客:{{.str2 | safe}}</p>
 </body>
 </html>

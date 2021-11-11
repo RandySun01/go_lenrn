@@ -18,9 +18,9 @@ func grammarFunc(w http.ResponseWriter, r *http.Request) {
 	// 1. 编写模板
 
 	// 2. 读取模板 解析指定文件生成模板对象
-	t, err := template.ParseFiles("./grammarTemplate.tmpl")
+	t, err := template.ParseFiles("./customFunctionTemplate.tmpl")
 	if err != nil {
-		fmt.Printf("read template faild err: %#v", err)
+		fmt.Printf("read templates faild err: %#v", err)
 	}
 
 	// 3. 渲染模板
@@ -38,9 +38,9 @@ func grammarFuncMany(w http.ResponseWriter, r *http.Request) {
 	// 1. 编写模板
 
 	// 2. 读取模板 解析指定文件生成模板对象
-	t, err := template.ParseFiles("./grammarTemplate.tmpl")
+	t, err := template.ParseFiles("./customFunctionTemplate.tmpl")
 	if err != nil {
-		fmt.Printf("read template faild err: %#v", err)
+		fmt.Printf("read templates faild err: %#v", err)
 	}
 
 	// 3. 渲染模板
@@ -57,9 +57,9 @@ func grammarFuncManyToMany(w http.ResponseWriter, r *http.Request) {
 	// 1. 编写模板
 
 	// 2. 读取模板 解析指定文件生成模板对象
-	t, err := template.ParseFiles("./grammarTemplate.tmpl")
+	t, err := template.ParseFiles("./customFunctionTemplate.tmpl")
 	if err != nil {
-		fmt.Printf("read template faild err: %#v", err)
+		fmt.Printf("read templates faild err: %#v", err)
 	}
 
 	// 3. 渲染模板
