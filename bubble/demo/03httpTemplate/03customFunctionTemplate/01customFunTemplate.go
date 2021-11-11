@@ -26,7 +26,7 @@ func customFunc(w http.ResponseWriter, r *http.Request) {
 	 // 创建一个名字是customFunctionTemplate.tmpl模板对象,名字一定要与模板的名字对应上
 	t, err := template.New("customFunctionTemplate.tmpl").Funcs(template.FuncMap{"kua": kua}).ParseFiles("./customFunctionTemplate.tmpl")
 	if err != nil {
-		fmt.Printf("read template faild err: %#v", err)
+		fmt.Printf("read templates faild err: %#v", err)
 	}
 
 	// 3. 渲染模板
@@ -39,10 +39,28 @@ func customFunc(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, userInfo)
 }
 
+// 传入单对象
+func nestingTmpl(w http.ResponseWriter, r *http.Request) {
 
+	// 解析模板
+	// 要将被包含的模板写在后面
+	tmpl, err := template.ParseFiles("./nestingTemplate.tmpl", "./ul.tmpl")
+	if err != nil {
+		fmt.Println("create templates failed, err:", err)
+		return
+	}
+	user := UserInfo{
+		Name:   "RandySun",
+		Gender: "男",
+		Age:    18,
+	}
+	// 渲染模板
+	tmpl.Execute(w, user)
+}
 func main() {
 
 	http.HandleFunc("/customFunc", customFunc)
+	http.HandleFunc("/nestingTmpl", nestingTmpl)
 
 	err := http.ListenAndServe(":9999", nil)
 	if err != nil {
