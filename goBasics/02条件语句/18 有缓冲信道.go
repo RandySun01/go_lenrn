@@ -7,8 +7,8 @@ func main() {
 
 	//0 无缓冲信道演示
 
-	//var a chan int = make(chan int)
-	//a <- 1 //一直阻塞在这，所以报死锁错误*/
+	//a1 := make(chan int)
+	//a1 <- 1 //一直阻塞在这，所以报死锁错误*/
 
 	//1 定义有缓冲信道（信道里可以真正的放值，没放满之前，不阻塞）
 	//定义了一个缓冲大小为3的信道
@@ -20,7 +20,7 @@ func main() {
 	//fmt.Println(<-a) //取出一个
 	//fmt.Println(<-a) //取出一个
 	//fmt.Println(<-a) //再取出一个，会死锁（会一直等待，等待死锁）
-	//
+
 
 	//2 无缓冲信道的本质是，缓冲大小为0 ，不是1：记住了
 	//var a chan int=make(chan int,0)

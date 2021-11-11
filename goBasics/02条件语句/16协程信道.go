@@ -19,8 +19,8 @@ func main() {
 	//fmt.Println(a)  // 打印出来是个地址：0xc000016120
 
 	//4 使用，不通协程之间传递数据
-	var a chan int = make(chan int)
-	go test55(a) //test5执行多长时间，不清楚，睡多久不知道，这种方式有问题
+	//var a chan int = make(chan int)
+	//go test55(a) //test5执行多长时间，不清楚，睡多久不知道，这种方式有问题
 
 	//把值从信道中取出
 	//<-a  //取出来，没有赋值给一个变量
@@ -32,7 +32,18 @@ func main() {
 
 	//5 信道，默认都是阻塞的（重点）
 	//本质，默认的信道，是放不进东西去，不管是放还是取，都阻塞
+	ch := make(chan int, 4)
+	var c chan  int
+	c1 := make(chan int, 4)
+	fmt.Println(c)
+	fmt.Println(ch)
+	close(c1)
+	x, ok := <-c1
+	fmt.Println(x,ok)
+	//go recv(ch) // 启用goroutine从通道接收值
 
+	ch<- 10
+	fmt.Println("发送成功")
 }
 
 func test55(a chan int) {
@@ -45,3 +56,8 @@ func test55(a chan int) {
 
 //6 例子，234   2的平方+3的平方+4的平方  +   2的立方+3的立方+4的立方
 //计算平方和与立方和的和
+
+func recv(c chan int) {
+	ret, ok :=<-c
+	fmt.Println("接收成功", ret, ok)
+}
