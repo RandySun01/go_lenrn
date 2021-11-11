@@ -1,0 +1,28 @@
+ab
+cd
+ab
+cd
+ab
+cd
+ab
+cd
+ab
+cd
+2021/08/28 17:05:14.813236 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:31: 这是一条很普通的日志。
+[小王子]2021/08/28 17:05:14.823837 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:33: 这是一条很普通的日志。
+2021/08/28 17:05:14.813236 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:31: 这是一条很普通的日志。
+[小王子]2021/08/28 17:05:14.823837 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:33: 这是一条很普通的日志。
+2021/08/28 17:05:14.813236 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:31: 这是一条很普通的日志。
+[小王子]2021/08/28 17:05:14.823837 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:33: 这是一条很普通的日志。
+2021/08/28 17:05:14.813236 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:31: 这是一条很普通的日志。
+[小王子]2021/08/28 17:05:14.823837 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:33: 这是一条很普通的日志。
+2021/08/28 17:05:14.813236 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:31: 这是一条很普通的日志。
+[小王子]2021/08/28 17:05:14.823837 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:33: 这是一条很普通的日志。
+2021/08/28 17:05:14.813236 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:31: 这是一条很普通的日志。
+[小王子]2021/08/28 17:05:14.823837 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:33: 这是一条很普通的日志。
+2021/08/28 17:05:14.813236 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:31: 这是一条很普通的日志。
+[小王子]2021/08/28 17:05:14.823837 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:33: 这是一条很普通的日志。
+2021/08/28 17:05:14.813236 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:31: 这是一条很普通的日志。
+[小王子]2021/08/28 17:05:14.823837 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:33: 这是一条很普通的日志。
+2021/08/28 17:05:14.813236 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:31: 这是一条很普通的日志。
+[小王子]2021/08/28 17:05:14.823837 E:/Lenrn_notes/03前端/04websocker/websocker/Go/goWebsocket/goroutine/logger.go:33: 这是一条很普通的日志。
