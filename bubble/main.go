@@ -1,10 +1,10 @@
 package main
 
 import (
-	"bubble/core"
+	"bubble/server"
 )
 
 func main() {
 	// 程序入口
-	core.Run()
+	server.Run()
 }
