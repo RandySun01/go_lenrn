@@ -10,6 +10,8 @@ import (
 @create 2021-09-02-8:10
 */
 var sentinelRdb *redis.Client
+
+// 哨兵方式
 func sentinelInitClient()(err error){
 	sentinelRdb = redis.NewFailoverClient(&redis.FailoverOptions{
 		MasterName: "master",

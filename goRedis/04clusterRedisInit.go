@@ -12,6 +12,8 @@ import (
 @create 2021-09-02-8:15
 */
 var clusterRdb *redis.ClusterClient
+
+// redis集群
 func clusterInitClient()(err error){
 	clusterRdb = redis.NewClusterClient(&redis.ClusterOptions{
 		Addrs: []string{":6379", ":7001", ":7002", ":7003", ":7004", ":7005"},
