@@ -28,7 +28,8 @@ func BatchInsertUsersSqlxDemo(users []*User) error {
 	// 自行拼接要执行的具体语句
 	stmt := fmt.Sprintf("INSERT INTO user (name, age) VALUES %s",
 		strings.Join(valueStrings, ","))
-
+	fmt.Println("手动拼接sql语句sql:", stmt, valueArgs)
+	// 手动拼接sql
 	_, err := DbSqlx.Exec(stmt, valueArgs...)
 	return err
 }
@@ -40,7 +41,7 @@ func (u User) Value() (driver.Value, error) {
 
 func BatchInsertInUsersSqlxDemo(users []interface{}) error {
 	query, args, _ := sqlx.In(
-		"INSERT INTO user (name, age) VALUES (?), (?), (?)",
+		"INSERT INTO user (name, age) VALUES (?), (?), (?)", // 有几个数据，就要有几个占位符
 		users..., // 如果arg实现了 driver.Valuer, sqlx.In 会通过调用 Value()来展开它
 	)
 	fmt.Println(query) // 查看生成的querystring
@@ -52,5 +53,6 @@ func BatchInsertInUsersSqlxDemo(users []interface{}) error {
 // BatchInsertNamedExecUsersSqlxDemo 使用NamedExec实现批量插入
 func BatchInsertNamedExecUsersSqlxDemo(users []*User) error {
 	_, err := DbSqlx.NamedExec("INSERT INTO user (name, age) VALUES (:name, :age)", users)
+
 	return err
 }

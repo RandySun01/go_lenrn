@@ -17,7 +17,12 @@ func NamedQuerySqlxDemo() {
 	defer rows.Close()
 	for rows.Next() {
 		var u User
+		//  放到结构体中
 		err := rows.StructScan(&u)
+		// 放到map
+		//err := rows.MapScan(&u)
+		// 放到切片
+		//err := rows.SliceScan(&u)
 		if err != nil {
 			fmt.Printf("scan failed, err:%v\n", err)
 			continue
@@ -28,6 +33,7 @@ func NamedQuerySqlxDemo() {
 	u := User{
 		Name: "Randy",
 	}
+
 	// 使用结构体命名查询，根据结构体字段的 db tag进行映射
 	rows, err = DbSqlx.NamedQuery(sqlStr, u)
 	if err != nil {

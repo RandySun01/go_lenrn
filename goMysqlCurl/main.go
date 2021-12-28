@@ -53,24 +53,24 @@ func main() {
 	//InsertUserSqlxDemo()
 	//NamedQuerySqlxDemo()
 	//TransactionSqlxDemo()
-	//u1 := User{Name: "RandySun1", Age: 18}
-	//u2 := User{Name: "RandySun2", Age: 28}
-	//u3 := User{Name: "RandySun3", Age: 38}
-	//
-	//// 方法1
+	//u1 := User{Name: "RandySun11", Age: 18}
+	//u2 := User{Name: "RandySun21", Age: 28}
+	//u3 := User{Name: "RandySun31", Age: 38}
+
+	////// 方法1
 	//users := []*User{&u1, &u2, &u3}
 	//err = BatchInsertUsersSqlxDemo(users)
 	//if err != nil {
 	//	fmt.Printf("BatchInsertUsers failed, err:%v\n", err)
 	//}
-	//
+	////
 	//// 方法2
 	//users2 := []interface{}{u1, u2, u3}
 	//err = BatchInsertInUsersSqlxDemo(users2)
 	//if err != nil {
 	//	fmt.Printf("BatchInsertUsers2 failed, err:%v\n", err)
 	//}
-	//
+
 	//// 方法3
 	//users3 := []*User{&u1, &u2, &u3}
 	//err = BatchInsertNamedExecUsersSqlxDemo(users3)
