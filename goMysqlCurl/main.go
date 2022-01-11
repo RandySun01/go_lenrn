@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 /*
 @author RandySun
@@ -77,10 +79,29 @@ func main() {
 	//if err != nil {
 	//	fmt.Printf("BatchInsertUsers3 failed, err:%v\n", err)
 	//}
-	Ids := []int{3,1,2}
+	//Ids := []int{3,1,2}
 	//userList, err := QueryByIds(Ids)
 	//fmt.Println(userList)
 
-	userList, err :=QueryAndOrderByIds(Ids)
-	fmt.Println(userList)
+	//userList, err :=QueryAndOrderByIds(Ids)
+	//fmt.Println(userList)
+
+	test()
+
+	//stmt := fmt.Sprintf("INSERT INTO user (name, age) VALUES %s",
+	//	strings.Join(valueStrings, ","))
+
+
+
 }
+
+func test() int{
+	a := 5
+	defer func() {
+		fmt.Println(a, 555555555555555)
+	}()
+	a = 10
+	fmt.Println("value of a before deferred function call", a)
+	return a
+}
+

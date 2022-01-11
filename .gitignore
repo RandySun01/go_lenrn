@@ -1,0 +1,10 @@
+*.pyc
+*.swo
+*.swn
+*.swp
+.idea
+.vscode
+.DS_Store
+*.egg-info
+*.csv
+*.json

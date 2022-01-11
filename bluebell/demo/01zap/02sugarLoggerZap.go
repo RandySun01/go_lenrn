@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-var logger *zap.Logger
+var logger1 *zap.Logger
 
 func main() {
 	InitLogger()
@@ -15,11 +15,11 @@ func main() {
 	simpleHttpGet("http://www.baidu.com")
 }
 
-func InitLogger() {
+func InitLogger1() {
 	logger, _ = zap.NewProduction()
 }
 
-func simpleHttpGet(url string) {
+func simpleHttpGet1(url string) {
 	resp, err := http.Get(url)
 	if err != nil {
 		logger.Error(
