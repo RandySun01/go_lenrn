@@ -1,0 +1,39 @@
+{"level":"DEBUG","time":"2022-01-11T08:52:10.190+0800","caller":"ginWeb/main.go:32","msg":"logger init success..."}
+{"level":"ERROR","time":"2022-01-11T08:52:12.242+0800","caller":"mysql/mysql.go:31","msg":"connect DB failed","error":"dial tcp 127.0.0.1:13306: connectex: No connection could be made because the target machine actively refused it."}
+{"level":"DEBUG","time":"2022-01-11T08:53:00.559+0800","caller":"ginWeb/main.go:32","msg":"logger init success..."}
+{"level":"DEBUG","time":"2022-01-11T08:57:55.442+0800","caller":"ginWeb/main.go:41","msg":"logger init success..."}
+{"level":"INFO","time":"2022-01-11T08:59:47.473+0800","caller":"ginWeb/main.go:78","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2022-01-11T08:59:47.488+0800","caller":"ginWeb/main.go:87","msg":"Server exiting"}
+{"level":"DEBUG","time":"2022-01-11T08:59:51.354+0800","caller":"ginWeb/main.go:41","msg":"logger init success..."}
+{"level":"INFO","time":"2022-01-11T09:00:54.351+0800","caller":"ginWeb/main.go:78","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2022-01-11T09:00:54.359+0800","caller":"ginWeb/main.go:87","msg":"Server exiting"}
+{"level":"DEBUG","time":"2022-01-11T09:00:57.352+0800","caller":"ginWeb/main.go:36","msg":"logger init success..."}
+{"level":"DEBUG","time":"2022-01-11T09:01:09.060+0800","caller":"ginWeb/main.go:39","msg":"logger init success..."}
+{"level":"DEBUG","time":"2022-01-11T09:01:32.545+0800","caller":"ginWeb/main.go:41","msg":"logger init success..."}
+{"level":"INFO","time":"2022-01-11T09:04:10.689+0800","caller":"ginWeb/main.go:78","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2022-01-11T09:04:10.701+0800","caller":"ginWeb/main.go:87","msg":"Server exiting"}
+{"level":"DEBUG","time":"2022-01-11T09:04:27.304+0800","caller":"ginWeb/main.go:41","msg":"logger init success..."}
+{"level":"INFO","time":"2022-01-11T09:07:22.559+0800","caller":"ginWeb/main.go:78","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2022-01-11T09:07:22.561+0800","caller":"ginWeb/main.go:87","msg":"Server exiting"}
+{"level":"DEBUG","time":"2022-01-11T09:08:18.420+0800","caller":"ginWeb/main.go:41","msg":"logger init success..."}
+{"level":"INFO","time":"2022-01-11T09:08:33.550+0800","caller":"logger/logger.go:75","msg":"/version","status":200,"method":"GET","path":"/version","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3724.8 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","time":"2022-01-11T09:08:33.621+0800","caller":"logger/logger.go:75","msg":"/favicon.ico","status":404,"method":"GET","path":"/favicon.ico","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3724.8 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","time":"2022-01-11T09:08:45.543+0800","caller":"logger/logger.go:75","msg":"/version","status":200,"method":"GET","path":"/version","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3724.8 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","time":"2022-01-11T09:08:51.113+0800","caller":"logger/logger.go:75","msg":"/version","status":200,"method":"GET","path":"/version","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3724.8 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","time":"2022-01-11T09:08:52.674+0800","caller":"logger/logger.go:75","msg":"/version","status":200,"method":"GET","path":"/version","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3724.8 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","time":"2022-01-11T09:08:53.262+0800","caller":"logger/logger.go:75","msg":"/version","status":200,"method":"GET","path":"/version","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3724.8 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","time":"2022-01-11T09:08:53.457+0800","caller":"logger/logger.go:75","msg":"/version","status":200,"method":"GET","path":"/version","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3724.8 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","time":"2022-01-11T09:08:55.729+0800","caller":"logger/logger.go:75","msg":"/version","status":200,"method":"GET","path":"/version","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3724.8 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","time":"2022-01-11T09:09:16.680+0800","caller":"logger/logger.go:75","msg":"/version","status":200,"method":"GET","path":"/version","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3724.8 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","time":"2022-01-11T09:09:17.594+0800","caller":"logger/logger.go:75","msg":"/version","status":200,"method":"GET","path":"/version","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3724.8 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","time":"2022-01-11T09:10:56.152+0800","caller":"logger/logger.go:75","msg":"/version","status":200,"method":"GET","path":"/version","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3724.8 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","time":"2022-01-11T09:11:40.121+0800","caller":"ginWeb/main.go:78","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2022-01-11T09:11:40.123+0800","caller":"ginWeb/main.go:87","msg":"Server exiting"}
+{"level":"DEBUG","time":"2022-01-11T22:03:15.751+0800","caller":"ginWeb/main.go:41","msg":"logger init success..."}
+{"level":"INFO","time":"2022-01-11T22:03:49.847+0800","caller":"logger/logger.go:75","msg":"/version","status":200,"method":"GET","path":"/version","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3724.8 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","time":"2022-01-11T22:03:50.024+0800","caller":"logger/logger.go:75","msg":"/favicon.ico","status":404,"method":"GET","path":"/favicon.ico","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3724.8 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","time":"2022-01-11T22:04:18.787+0800","caller":"logger/logger.go:75","msg":"/version","status":200,"method":"GET","path":"/version","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3724.8 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","time":"2022-01-11T22:08:09.405+0800","caller":"logger/logger.go:75","msg":"/version","status":200,"method":"GET","path":"/version","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3724.8 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","time":"2022-01-11T22:08:28.020+0800","caller":"logger/logger.go:75","msg":"/version","status":200,"method":"GET","path":"/version","query":"","ip":"127.0.0.1","user-agent":"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3724.8 Safari/537.36","errors":"","cost":0}
+{"level":"INFO","time":"2022-01-11T22:08:31.825+0800","caller":"ginWeb/main.go:78","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2022-01-11T22:08:34.070+0800","caller":"ginWeb/main.go:87","msg":"Server exiting"}

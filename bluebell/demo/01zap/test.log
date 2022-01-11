@@ -1,0 +1,9 @@
+{"level":"error","ts":1640826450.5242653,"msg":"Error fetching url..{url 15 0 www.google.com <nil>} {error 26 0  Get \"www.google.com\": unsupported protocol scheme \"\"}"}
+{"level":"error","ts":1640826471.5725465,"msg":"Error fetching url..{url 15 0 http://www.google.com <nil>} {error 26 0  Get \"http://www.google.com\": dial tcp 173.252.73.48:80: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.}"}
+{"level":"info","ts":1640826471.6197298,"msg":"Success..{statusCode 15 0 200 OK <nil>} {url 15 0 http://www.baidu.com <nil>}"}
+1.6408266589135118e+09	error	Error fetching url..{url 15 0 www.google.com <nil>} {error 26 0  Get "www.google.com": unsupported protocol scheme ""}
+1.640826679977637e+09	error	Error fetching url..{url 15 0 http://www.google.com <nil>} {error 26 0  Get "http://www.google.com": dial tcp 31.13.78.66:80: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.}
+1.6408266800141683e+09	info	Success..{statusCode 15 0 200 OK <nil>} {url 15 0 http://www.baidu.com <nil>}
+2021-12-31T08:40:25.965+0800	ERROR	Error fetching url..{url 15 0 www.google.com <nil>} {error 26 0  Get "www.google.com": unsupported protocol scheme ""}
+2021-12-31T08:40:47.054+0800	ERROR	Error fetching url..{url 15 0 http://www.google.com <nil>} {error 26 0  Get "http://www.google.com": dial tcp 108.160.169.54:80: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.}
+2021-12-31T08:40:47.092+0800	INFO	Success..{statusCode 15 0 200 OK <nil>} {url 15 0 http://www.baidu.com <nil>}
