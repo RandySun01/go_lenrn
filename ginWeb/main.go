@@ -25,8 +25,15 @@ import (
 // Go Web开发较通用的脚手架模板
 
 func main() {
+	if len(os.Args) < 2 {
+		fmt.Printf("need config file. eg: bluebell config.yaml\n")
+		return
+	}
+
 	// 1. 加载配置
-	if err := settings.Init(); err != nil {
+	fileName := os.Args[1]
+	fmt.Printf("配置文件目录%s\n", fileName)
+	if err := settings.Init(fileName); err != nil {
 		fmt.Printf("init settings failed, err:%v\n", err)
 		return
 	}
