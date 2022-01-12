@@ -1,0 +1,13 @@
+{"level":"DEBUG","time":"2022-01-12T22:03:46.704+0800","caller":"bluebell/main.go:47","msg":"logger init success..."}
+{"level":"DEBUG","time":"2022-01-12T22:05:38.669+0800","caller":"bluebell/main.go:47","msg":"logger init success..."}
+{"level":"DEBUG","time":"2022-01-12T22:05:53.741+0800","caller":"bluebell/main.go:47","msg":"logger init success..."}
+{"level":"DEBUG","time":"2022-01-12T22:06:16.546+0800","caller":"bluebell/main.go:47","msg":"logger init success..."}
+{"level":"DEBUG","time":"2022-01-12T22:08:22.261+0800","caller":"bluebell/main.go:47","msg":"logger init success..."}
+{"level":"DEBUG","time":"2022-01-12T22:09:44.055+0800","caller":"bluebell/main.go:47","msg":"logger init success..."}
+{"level":"DEBUG","time":"2022-01-12T22:09:59.861+0800","caller":"bluebell/main.go:47","msg":"logger init success..."}
+{"level":"DEBUG","time":"2022-01-12T22:10:02.622+0800","caller":"bluebell/main.go:47","msg":"logger init success..."}
+{"level":"DEBUG","time":"2022-01-12T22:12:03.708+0800","caller":"bluebell/main.go:47","msg":"logger init success..."}
+{"level":"DEBUG","time":"2022-01-12T22:13:55.650+0800","caller":"bluebell/main.go:47","msg":"logger init success..."}
+{"level":"ERROR","time":"2022-01-12T22:13:57.674+0800","caller":"mysql/mysql.go:30","msg":"connect DB failed","error":"dial tcp 127.0.0.1:33069: connectex: No connection could be made because the target machine actively refused it."}
+{"level":"DEBUG","time":"2022-01-12T22:14:05.275+0800","caller":"bluebell/main.go:47","msg":"logger init success..."}
+{"level":"DEBUG","time":"2022-01-12T22:14:09.782+0800","caller":"bluebell/main.go:47","msg":"logger init success..."}
