@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bluebell/controller"
 	"bluebell/dao/mysql"
 	"bluebell/dao/redis"
 	"bluebell/logger"
@@ -62,7 +63,13 @@ func main() {
 		return
 	}
 	defer redis.Close()
-	// 5. 注册路由
+
+	// 初始化gin框架内置的校验器使用的翻译器
+	if err := controller.InitTrans("zh"); err != nil {
+		fmt.Printf("init validator trans failed, err:%v\n", err)
+		return
+	}
+	// 6. 注册路由
 	r := routes.Setup(settings.Conf.Mode)
 	// 6. 启动服务（优雅关机）
 	fmt.Println(settings.Conf.AppConfig.Port, 3333333333333333)
