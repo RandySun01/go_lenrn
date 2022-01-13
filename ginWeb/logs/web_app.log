@@ -21,3 +21,8 @@
 {"level":"INFO","time":"2022-01-11T22:46:26.608+0800","caller":"ginWeb/main.go:85","msg":"Shutdown Server ..."}
 {"level":"INFO","time":"2022-01-11T22:46:26.621+0800","caller":"ginWeb/main.go:94","msg":"Server exiting"}
 {"level":"DEBUG","time":"2022-01-11T22:46:32.002+0800","caller":"ginWeb/main.go:48","msg":"logger init success..."}
+{"level":"INFO","time":"2022-01-11T23:17:21.685+0800","caller":"ginWeb/main.go:85","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2022-01-11T23:17:21.692+0800","caller":"ginWeb/main.go:94","msg":"Server exiting"}
+{"level":"DEBUG","time":"2022-01-12T22:15:40.367+0800","caller":"ginWeb/main.go:48","msg":"logger init success..."}
+{"level":"INFO","time":"2022-01-12T22:33:56.468+0800","caller":"ginWeb/main.go:85","msg":"Shutdown Server ..."}
+{"level":"INFO","time":"2022-01-12T22:33:56.474+0800","caller":"ginWeb/main.go:94","msg":"Server exiting"}

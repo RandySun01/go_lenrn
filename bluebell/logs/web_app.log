@@ -68,3 +68,7 @@
 {"level":"INFO","time":"2022-01-12T23:03:14.740+0800","caller":"logger/logger.go:75","msg":"/signup","status":200,"method":"POST","path":"/signup","query":"","ip":"127.0.0.1","user-agent":"PostmanRuntime/7.26.8","errors":"","cost":0.0010942}
 {"level":"INFO","time":"2022-01-12T23:04:35.636+0800","caller":"bluebell/main.go:96","msg":"Shutdown Server ..."}
 {"level":"INFO","time":"2022-01-12T23:04:35.638+0800","caller":"bluebell/main.go:105","msg":"Server exiting"}
+{"level":"DEBUG","time":"2022-01-13T09:11:02.065+0800","caller":"bluebell/main.go:48","msg":"logger init success..."}
+{"level":"ERROR","time":"2022-01-13T09:11:23.101+0800","caller":"controller/user.go:27","msg":"SignUp with invalid param","error":"Key: 'UserParamSignUp.re_password' Error:Field validation for 're_password' failed on the 'eqfield' tag\nKey: 'UserParamSignUp.re_password' Error:Field validation for 're_password' failed on the 'eqfield' tag"}
+{"level":"INFO","time":"2022-01-13T09:11:23.101+0800","caller":"logger/logger.go:75","msg":"/signup","status":200,"method":"POST","path":"/signup","query":"","ip":"127.0.0.1","user-agent":"PostmanRuntime/7.26.8","errors":"","cost":0.0009485}
+{"level":"INFO","time":"2022-01-13T09:11:28.180+0800","caller":"logger/logger.go:75","msg":"/signup","status":200,"method":"POST","path":"/signup","query":"","ip":"127.0.0.1","user-agent":"PostmanRuntime/7.26.8","errors":"","cost":0.1490947}
