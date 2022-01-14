@@ -38,3 +38,13 @@ func SignUp(p *params.UserParamSignUp) (err error) {
 	// 保存进入数据库
 	return mysql.InsertUser(userInfo)
 }
+
+func Login(p *params.UserParamLogin) (err error) {
+	// 判断用户存不住
+	userInfo := &user.User{
+		Username: p.Username,
+		Password: p.Password,
+	}
+	// 数据库中查询是否存在
+	return mysql.Login(userInfo)
+}

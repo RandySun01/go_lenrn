@@ -13,4 +13,5 @@ import (
 func UserRouters(r *gin.Engine) {
 	// 用户注册
 	r.POST("/signup", controller.SignUpHandler)
+	r.POST("/login", controller.LoginHandler)
 }

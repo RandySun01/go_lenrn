@@ -1,8 +1,10 @@
 package controller
 
 import (
+	"bluebell/dao/mysql"
 	"bluebell/models/params"
 	"bluebell/service"
+	"errors"
 	"fmt"
 	"net/http"
 
@@ -29,15 +31,11 @@ func SignUpHandler(c *gin.Context) {
 		// 判断err是不是validator.ValidationErrors类型
 		errs, ok := err.(validator.ValidationErrors)
 		if !ok {
-			c.JSON(http.StatusOK, gin.H{
-				"msg": err.Error(),
-			})
+			ResponseError(c, CodeInvalidParam)
+			return
 		}
 		// 翻译
-		c.JSON(http.StatusOK, gin.H{
-			"msg": removeTopStruct(errs.Translate(trans)), // 翻译错误
-		})
-
+		ResponseErrorWithMsg(c, CodeInvalidParam, removeTopStruct(errs.Translate(trans)), nil)
 		return
 	}
 	fmt.Println(p)
@@ -51,13 +49,52 @@ func SignUpHandler(c *gin.Context) {
 	//}
 	// 2.业务处理
 	if err := service.SignUp(p); err != nil {
-		c.JSON(http.StatusOK, gin.H{
-			"msg": "注册失败",
-		})
+		zap.L().Error("logic.SigUp failed", zap.Error(err))
+		if errors.Is(err, mysql.ErrorUserExist) {
+			ResponseError(c, CodeUserExist)
+			return
+		}
+		ResponseError(c, CodeServerBusy)
 		return
 	}
 	// 3.返回响应
+	ResponseSuccess(c, nil)
+}
+
+func LoginHandler(c *gin.Context) {
+	// 获取请求参数校验
+	var p = new(params.UserParamLogin)
+	if err := c.ShouldBindJSON(p); err != nil {
+		// 格式校验
+		// 请求参数有误,直接返回响应
+		zap.L().Error("Login with invalid param", zap.String("username", p.Username), zap.Error(err))
+
+		// 判断err是不是validator.ValidationErrors类型
+		errs, ok := err.(validator.ValidationErrors)
+		if !ok {
+			ResponseError(c, CodeInvalidParam)
+			return
+		}
+
+		// 翻译错误
+		ResponseErrorWithMsg(c, CodeInvalidParam, removeTopStruct(errs.Translate(trans)), nil)
+		return
+	}
+	fmt.Println(p)
+
+	// 业务逻辑处理
+	if err := service.Login(p); err != nil {
+		zap.L().Error("logic.Login failed", zap.Error(err))
+		if errors.Is(err, mysql.ErrorUserNotExist) {
+			ResponseError(c, CodeUserNotExist)
+			return
+		}
+		ResponseError(c, CodeInvalidParam)
+		return
+	}
+	//  返回响应信息
 	c.JSON(http.StatusOK, gin.H{
-		"msg": "ok",
+		"msg": "登录成功",
 	})
+	ResponseSuccess(c, nil)
 }
