@@ -6,7 +6,6 @@ import (
 	"bluebell/service"
 	"errors"
 	"fmt"
-	"net/http"
 
 	"github.com/go-playground/validator/v10"
 
@@ -83,7 +82,8 @@ func LoginHandler(c *gin.Context) {
 	fmt.Println(p)
 
 	// 业务逻辑处理
-	if err := service.Login(p); err != nil {
+	token, err := service.Login(p)
+	if err != nil {
 		zap.L().Error("logic.Login failed", zap.Error(err))
 		if errors.Is(err, mysql.ErrorUserNotExist) {
 			ResponseError(c, CodeUserNotExist)
@@ -93,8 +93,12 @@ func LoginHandler(c *gin.Context) {
 		return
 	}
 	//  返回响应信息
-	c.JSON(http.StatusOK, gin.H{
-		"msg": "登录成功",
-	})
+
+	ResponseSuccess(c, token)
+}
+
+func LoginPingHandler(c *gin.Context) {
+	// 如果是登录用户,判断请求头中是否是有效的JWT
+
 	ResponseSuccess(c, nil)
 }

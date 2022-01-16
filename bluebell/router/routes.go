@@ -2,6 +2,7 @@ package routes
 
 import (
 	"bluebell/logger"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -10,6 +11,7 @@ import (
 @author RandySun
 @create 2022-01-11-8:31
 */
+
 func Setup(mode string) *gin.Engine {
 	if mode == gin.ReleaseMode {
 		gin.SetMode(gin.ReleaseMode)
@@ -22,5 +24,11 @@ func Setup(mode string) *gin.Engine {
 	// 用户
 	UserRouters(r)
 
+	r.NoRoute(func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"msg": http.StatusNotFound,
+		})
+
+	})
 	return r
 }

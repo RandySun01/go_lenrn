@@ -25,13 +25,15 @@ import (
 @create 2021-12-30-8:50
 */
 func main() {
+	var fileName = ""
 	if len(os.Args) < 2 {
 		fmt.Printf("need config file. eg: bluebell config.yaml\n")
-		return
+		fileName = "./config.yaml"
+	} else {
+		fileName = os.Args[1]
 	}
 
 	// 1. 加载配置
-	fileName := os.Args[1]
 	fmt.Printf("配置文件目录%s\n", fileName)
 	if err := settings.Init(fileName); err != nil {
 		fmt.Printf("init settings failed, err:%v\n", err)

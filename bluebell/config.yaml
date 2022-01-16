@@ -1,6 +1,6 @@
 app:
   name: "web_app"
-  mode: " "
+  mode: "dev"
   version: "124sdf"
   port: 8080
   start_time: "2022-01-12"
