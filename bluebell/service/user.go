@@ -2,8 +2,8 @@ package service
 
 import (
 	"bluebell/dao/mysql"
-	"bluebell/models/params"
-	"bluebell/models/user"
+	"bluebell/models/modelParams"
+	"bluebell/models/modelUser"
 	"bluebell/pkg/jwt"
 	"bluebell/pkg/snowflake"
 )
@@ -15,7 +15,7 @@ import (
 
 // 存放业务逻辑的代码
 
-func SignUp(p *params.UserParamSignUp) (err error) {
+func SignUp(p *modelParams.UserParamSignUp) (err error) {
 	// 判断用户存不住
 	err = mysql.CheckUserExist(p.Username)
 	if err != nil {
@@ -27,7 +27,7 @@ func SignUp(p *params.UserParamSignUp) (err error) {
 	userId := snowflake.GenId()
 
 	// 构建user实例
-	userInfo := &user.User{
+	userInfo := &modelUser.User{
 		UserId:   userId,
 		Username: p.Username,
 		Password: p.Password,
@@ -36,9 +36,9 @@ func SignUp(p *params.UserParamSignUp) (err error) {
 	return mysql.InsertUser(userInfo)
 }
 
-func Login(p *params.UserParamLogin) (token string, err error) {
+func Login(p *modelParams.UserParamLogin) (token string, err error) {
 	// 判断用户存不住
-	userInfo := &user.User{
+	userInfo := &modelUser.User{
 		Username: p.Username,
 		Password: p.Password,
 	}

@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"bluebell/models/params"
+	"bluebell/models/modelParams"
 	"fmt"
 	"reflect"
 	"strings"
@@ -36,7 +36,7 @@ func InitTrans(locale string) (err error) {
 			return name
 		})
 		// 为SignUpParam注册自定义校验方法
-		v.RegisterStructValidation(SignUpParamStructLevelValidation, params.UserParamSignUp{})
+		v.RegisterStructValidation(SignUpParamStructLevelValidation, modelParams.UserParamSignUp{})
 		zhT := zh.New() // 中文翻译器
 		enT := en.New() // 英文翻译器
 
@@ -78,7 +78,7 @@ func removeTopStruct(fields map[string]string) map[string]string {
 
 // SignUpParamStructLevelValidation 自定义SignUpParam结构体校验函数
 func SignUpParamStructLevelValidation(sl validator.StructLevel) {
-	su := sl.Current().Interface().(params.UserParamSignUp)
+	su := sl.Current().Interface().(modelParams.UserParamSignUp)
 
 	if su.Password != su.RePassword {
 		// 输出错误提示信息，最后一个参数就是传递的param

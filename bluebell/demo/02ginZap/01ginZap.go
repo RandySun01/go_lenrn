@@ -106,7 +106,7 @@ func GinLogger(logger *zap.Logger) gin.HandlerFunc {
 			zap.String("path", path),                                             // 请求的路径
 			zap.String("query", query),                                           // 请求的参数
 			zap.String("ip", c.ClientIP()),                                       // 请求的IP
-			zap.String("user-agent", c.Request.UserAgent()),                      // 请求头
+			zap.String("modelUser-agent", c.Request.UserAgent()),                 // 请求头
 			zap.String("errors", c.Errors.ByType(gin.ErrorTypePrivate).String()), // 错误信息
 			zap.Duration("cost", cost),                                           // 请求时间
 		)

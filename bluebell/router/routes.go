@@ -24,6 +24,12 @@ func Setup(mode string) *gin.Engine {
 	// 用户
 	UserRouters(r)
 
+	// 分类
+	CommunityRouters(r)
+
+	// 创建贴在
+	PostRouters(r)
+
 	r.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"msg": http.StatusNotFound,

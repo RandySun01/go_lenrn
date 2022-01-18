@@ -15,8 +15,8 @@ const ContextUserIdKey = "userId"
 
 var ErrorUserNotLogin = errors.New("用户未登录")
 
-// GetCurrentUser 获取用户信息
-func GetCurrentUser(c *gin.Context) (userId int64, err error) {
+// GetCurrentUserId 获取用户信息
+func GetCurrentUserId(c *gin.Context) (userId int64, err error) {
 	uid, ok := c.Get(ContextUserIdKey)
 	if !ok {
 		err = ErrorUserNotLogin

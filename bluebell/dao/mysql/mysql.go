@@ -24,6 +24,7 @@ func Init(cfg *settings.MySQLConfig) (err error) {
 		cfg.Port,
 		cfg.DbName,
 	)
+	fmt.Println(dsn)
 	// 也可以使用MustConnect连接不成功就panic
 	db, err = sqlx.Connect("mysql", dsn)
 	if err != nil {

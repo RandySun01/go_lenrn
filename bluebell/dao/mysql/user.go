@@ -1,11 +1,10 @@
 package mysql
 
 import (
-	"bluebell/models/user"
+	"bluebell/models/modelUser"
 	"crypto/md5"
 	"database/sql"
 	"encoding/hex"
-	"errors"
 	"fmt"
 )
 
@@ -22,17 +21,11 @@ func QueryUserByUserName() {
 
 const secret = "RandySun"
 
-var (
-	ErrorUserExist       = errors.New("用户已经存在")
-	ErrorUserNotExist    = errors.New("用户不存在, 请注册")
-	ErrorInvalidPassword = errors.New("密码错误")
-)
-
 // CheckUserExist 判断用户是否存在
 func CheckUserExist(username string) (err error) {
-	sqlStr := `select count(user_id) from user where username = ?`
+	sqlStr := `select count(user_id) from modelUser where username = ?`
 	var count int
-	if err := db.Get(&count, sqlStr, username); err != nil {
+	if err = db.Get(&count, sqlStr, username); err != nil {
 		return err
 	}
 	if count > 0 {
@@ -43,11 +36,11 @@ func CheckUserExist(username string) (err error) {
 }
 
 // InsertUser 数据库中插入一条新用户
-func InsertUser(user *user.User) (err error) {
+func InsertUser(user *modelUser.User) (err error) {
 	// 对密码加密
 	password := encryptPassword(user.Password)
 	// 执行SQL语句入库
-	sqlStr := `insert into user(user_id, username, password) values(?, ?, ?)`
+	sqlStr := `insert into User(user_id, username, password) values(?, ?, ?)`
 	createUser, err := db.Exec(sqlStr, user.UserId, user.Username, password)
 	fmt.Println(createUser)
 
@@ -62,9 +55,9 @@ func encryptPassword(oPassword string) string {
 
 }
 
-func Login(user *user.User) (err error) {
+func Login(user *modelUser.User) (err error) {
 	oPassword := user.Password
-	sqlStr := `select user_id, username, password from user where username = ?`
+	sqlStr := `select user_id, username, password from User where username = ?`
 	err = db.Get(user, sqlStr, user.Username)
 	// 用户不存在
 	if err == sql.ErrNoRows {
@@ -81,4 +74,13 @@ func Login(user *user.User) (err error) {
 
 	}
 	return
+}
+
+// GetUserById 根据用户id获取用户详细信息
+func GetUserById(userId int64) (user *modelUser.User, err error) {
+	sqlStr := "select user_id, username from user where user_id = ?;"
+	user = new(modelUser.User)
+	err = db.Get(user, sqlStr, userId)
+	return
+
 }

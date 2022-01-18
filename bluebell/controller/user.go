@@ -2,7 +2,7 @@ package controller
 
 import (
 	"bluebell/dao/mysql"
-	"bluebell/models/params"
+	"bluebell/models/modelParams"
 	"bluebell/service"
 	"errors"
 	"fmt"
@@ -21,7 +21,7 @@ import (
 
 func SignUpHandler(c *gin.Context) {
 	// 1. 参数校验
-	var p = new(params.UserParamSignUp)
+	var p = new(modelParams.UserParamSignUp)
 	if err := c.ShouldBindJSON(p); err != nil {
 		// 格式校验
 		// 请求参数有误,直接返回响应
@@ -62,7 +62,7 @@ func SignUpHandler(c *gin.Context) {
 
 func LoginHandler(c *gin.Context) {
 	// 获取请求参数校验
-	var p = new(params.UserParamLogin)
+	var p = new(modelParams.UserParamLogin)
 	if err := c.ShouldBindJSON(p); err != nil {
 		// 格式校验
 		// 请求参数有误,直接返回响应
