@@ -51,6 +51,7 @@ func CreatePostHandler(c *gin.Context) {
 	ResponseSuccess(c, nil)
 }
 
+// GetPostDetailHandler 获取帖子电调数据
 func GetPostDetailHandler(c *gin.Context) {
 	// 获取参数(从URL中获取帖子的id)
 	postIdStr := c.Param("id")
@@ -65,6 +66,27 @@ func GetPostDetailHandler(c *gin.Context) {
 	if err != nil {
 		zap.L().Error("GetPostDetailHandler Get params err", zap.Error(err))
 		ResponseError(c, CodeServerBusy)
+		return
+	}
+	// 返回响应
+	ResponseSuccess(c, data)
+
+}
+
+// GetPostListHandler 获取帖子分页
+func GetPostListHandler(c *gin.Context) {
+	// 获取分页参数
+	page, size, err := getPageInfo(c)
+	zap.L().Error(
+		"service.GetPostList page size failed",
+		zap.Int64("page", page),
+		zap.Int64("size", size),
+		zap.Error(err),
+	)
+	// 获取数据
+	data, err := service.GetPostList(page, size)
+	if err != nil {
+		zap.L().Error("service.GetPostList failed", zap.Error(err))
 		return
 	}
 	// 返回响应
