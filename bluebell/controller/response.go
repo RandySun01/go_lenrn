@@ -13,7 +13,7 @@ import (
 type Response struct {
 	Code ResCode     `json:"code"`
 	Msg  interface{} `json:"msg"`
-	Data interface{} `json:"data"`
+	Data interface{} `json:"data,omitempty"` //omitempty:字段值为空忽略,不返回
 	//Status int         `json:"status"`
 }
 

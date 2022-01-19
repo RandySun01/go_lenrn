@@ -82,7 +82,7 @@ func LoginHandler(c *gin.Context) {
 	fmt.Println(p)
 
 	// 业务逻辑处理
-	token, err := service.Login(p)
+	userInfo, err := service.Login(p)
 	if err != nil {
 		zap.L().Error("logic.Login failed", zap.Error(err))
 		if errors.Is(err, mysql.ErrorUserNotExist) {
@@ -93,8 +93,14 @@ func LoginHandler(c *gin.Context) {
 		return
 	}
 	//  返回响应信息
-
-	ResponseSuccess(c, token)
+	// https://www.ituring.com.cn/article/506822
+	ResponseSuccess(
+		c,
+		gin.H{
+			"user_id":   userInfo.UserId, // id值大于 1 << 53-1,  int64类型的最值大于63-1
+			"user_name": userInfo.Username,
+			"token":     userInfo.Token,
+		})
 }
 
 func LoginPingHandler(c *gin.Context) {

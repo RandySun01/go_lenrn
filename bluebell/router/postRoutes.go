@@ -11,6 +11,8 @@ import (
 @author RandySun
 @create 2022-01-16-16:13
 */
+
+// PostRouters 帖子相关
 func PostRouters(r *gin.Engine) {
 	// 用户注册
 	v1 := r.Group("/api/v1")

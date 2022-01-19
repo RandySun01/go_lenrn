@@ -36,18 +36,23 @@ func SignUp(p *modelParams.UserParamSignUp) (err error) {
 	return mysql.InsertUser(userInfo)
 }
 
-func Login(p *modelParams.UserParamLogin) (token string, err error) {
+func Login(p *modelParams.UserParamLogin) (userInfo *modelUser.User, err error) {
 	// 判断用户存不住
-	userInfo := &modelUser.User{
+	userInfo = &modelUser.User{
 		Username: p.Username,
 		Password: p.Password,
 	}
 	// 数据库中查询是否存在  传递的是一个指针
 	if err = mysql.Login(userInfo); err != nil {
-		return "", err
+		return nil, err
 	}
 
 	// 生成JWT的token
-	return jwt.GenToken(userInfo.UserId, userInfo.Username)
+	token, err := jwt.GenToken(userInfo.UserId, userInfo.Username)
+	if err != nil {
+		return nil, err
+	}
+	userInfo.Token = token
+	return
 
 }
