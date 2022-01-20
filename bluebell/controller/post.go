@@ -45,6 +45,7 @@ func CreatePostHandler(c *gin.Context) {
 	// 创建帖子
 	if err := service.CreatePost(p); err != nil {
 		zap.L().Error("service.CreatePost failed", zap.Error(err))
+		ResponseError(c, CodeServerBusy)
 		return
 	}
 	// 返回响应

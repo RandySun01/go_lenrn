@@ -2,6 +2,7 @@ package service
 
 import (
 	"bluebell/dao/mysql"
+	"bluebell/dao/redis"
 	"bluebell/models/modelPost"
 	"bluebell/pkg/snowflake"
 
@@ -16,7 +17,13 @@ func CreatePost(p *modelPost.Post) (err error) {
 	// 生成post id
 	p.Id = snowflake.GenId()
 	//保存到数据库
-	return mysql.CreatePost(p)
+	err = mysql.CreatePost(p)
+	if err != nil {
+		return err
+	}
+	// 记录保存到reds中
+	err = redis.CreatePost(p.Id)
+	return err
 }
 
 // GetPostDetail 获取单条数据

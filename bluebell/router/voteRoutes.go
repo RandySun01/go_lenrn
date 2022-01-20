@@ -11,6 +11,7 @@ import (
 @author RandySun
 @create 2022-01-19-8:58
 */
+
 // VoteRouters 帖子相关
 func VoteRouters(r *gin.Engine) {
 	// 用户注册

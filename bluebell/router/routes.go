@@ -30,6 +30,8 @@ func Setup(mode string) *gin.Engine {
 	// 创建贴在
 	PostRouters(r)
 
+	// 投票
+	VoteRouters(r)
 	r.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"msg": http.StatusNotFound,
