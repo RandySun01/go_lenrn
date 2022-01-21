@@ -42,13 +42,13 @@ func GetPostList(page, size int64) (postList []*modelPost.Post, err error) {
 
 // 根据指定的id列表查询帖子的数据
 func GetPostListByIds(ids []string) (postList []*modelPost.Post, err error) {
-	sqlStr := `select post_id,title, content, author_id, community_id, create_time from post where id in (?) order by find_in_set(post_id, ?)`
+	sqlStr := `select post_id,title, content, author_id, community_id, create_time from post where post_id in (?) order by find_in_set(post_id, ?)`
 	query, arts, err := sqlx.In(sqlStr, ids, strings.Join(ids, ","))
 	if err != nil {
 		return nil, err
 	}
 	// 绑定数据
 	query = db.Rebind(query)
-	err = db.Select(&postList, query, arts)
+	err = db.Select(&postList, query, arts...)
 	return
 }

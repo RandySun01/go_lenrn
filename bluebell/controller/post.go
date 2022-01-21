@@ -101,7 +101,7 @@ func GetPostListHandler(c *gin.Context) {
 // GetPostListHandler2 升级版帖子列表接口
 // 根据前端传来的参数动态的获取帖子的列表
 // 按照时间排序 或者按照分数排序
-// 1.获取分数
+// 1.获取请求query string 参数
 // 2. 去redis查询id列表
 // 3.根据id去数据库查询帖子详细信息
 func GetPostListHandler2(c *gin.Context) {
@@ -113,7 +113,11 @@ func GetPostListHandler2(c *gin.Context) {
 		Size:  10,
 		Order: common.OrderTime, // magic string
 	}
+	if p.CommunityId == 0 {
 
+	} else {
+
+	}
 	// c.ShouldBind() 根据请求的数据类型选择相应的方法去获取数据
 	// c.ShouldBindJSON() 如果请求中携带是json数据格式,才能用这个方法获取到数据
 	if err := c.ShouldBindQuery(p); err != nil {
@@ -121,20 +125,59 @@ func GetPostListHandler2(c *gin.Context) {
 		ResponseError(c, CodeInvalidParam)
 		return
 	}
-	page, size, err := getPageInfo(c)
-	zap.L().Error(
-		"service.GetPostList page size failed",
-		zap.Int64("page", page),
-		zap.Int64("size", size),
-		zap.Error(err),
-	)
+
 	// 获取数据
-	data, err := service.GetPostList(page, size)
+	//data, err := service.GetPostList2(p)
+	// 更新获取帖子，合二为一
+	data, err := service.GetPostListNew(p)
+
 	if err != nil {
-		zap.L().Error("service.GetPostList failed", zap.Error(err))
+		zap.L().Error("service.GetPostList2 failed", zap.Error(err))
+		ResponseError(c, CodeServerBusy)
 		return
 	}
+	zap.L().Error(
+		"service.GetPostList page size failed",
+		zap.Error(err),
+	)
 	// 返回响应
 	ResponseSuccess(c, data)
 
 }
+
+// GetCommunityPostListHandler 根据社区去查询帖子列表
+//func GetCommunityPostListHandler(c *gin.Context) {
+//
+//	// 获取分页参数 /api/v1/posts/?page=1&size=10&order=time
+//
+//	// 初始化函数结构体时,指定初始化参数
+//	p := &modelParams.ParamCommunityPostList{
+//		ParamPostList: &modelParams.ParamPostList{
+//			Page:  1,
+//			Size:  10,
+//			Order: common.OrderTime, // magic string
+//		},
+//	}
+//
+//	// c.ShouldBind() 根据请求的数据类型选择相应的方法去获取数据
+//	// c.ShouldBindJSON() 如果请求中携带是json数据格式,才能用这个方法获取到数据
+//	if err := c.ShouldBindQuery(p); err != nil {
+//		zap.L().Error("GetCommunityPostListHandler with invalid params", zap.Error(err))
+//		ResponseError(c, CodeInvalidParam)
+//		return
+//	}
+//
+//	// 获取数据
+//	data, err := service.GetCommunityPostList(p)
+//	if err != nil {
+//		zap.L().Error("service.GetPostList2 failed", zap.Error(err))
+//		ResponseError(c, CodeServerBusy)
+//		return
+//	}
+//	zap.L().Error(
+//		"service.GetPostList page size failed",
+//		zap.Error(err),
+//	)
+//	// 返回响应
+//	ResponseSuccess(c, data)
+//}

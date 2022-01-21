@@ -3,8 +3,8 @@ package redis
 import (
 	"context"
 	"errors"
-	"fmt"
 	"math"
+	"strconv"
 	"time"
 
 	"go.uber.org/zap"
@@ -45,10 +45,11 @@ const (
 
 var (
 	ErrVoteTimeExpire = errors.New("投票时间已过")
+	ErrVoteRepeated   = errors.New("不允许重复投票")
 )
 
 // CreatePost 将创建的帖子放入到redis中
-func CreatePost(postId int64) error {
+func CreatePost(postId, communityId int64) error {
 	zap.L().Debug("CreatePost add redis time postId", zap.Int64("postId", postId))
 	//事务
 	pipeline := rdb.TxPipeline()
@@ -63,8 +64,12 @@ func CreatePost(postId int64) error {
 		Score:  float64(time.Now().Unix()),
 		Member: postId,
 	})
+
+	// 把帖子id加到社区的set中
+	cKey := getRedisKey(KeyCommunitySetPrefix + strconv.Itoa(int(communityId)))
+	pipeline.SAdd(context.Background(), cKey, postId)
+
 	_, err := pipeline.Exec(context.Background())
-	fmt.Println(err, "66666")
 
 	return err
 
@@ -80,7 +85,10 @@ func VoteForPost(userId, postId string, value float64) error {
 	// 更新帖子的分数
 	// 先查当前用户给当前帖子的投票记录 赞成票(1),反对票(-1) 取消(0)
 	ov := rdb.ZScore(context.Background(), getRedisKey(KeyPostVotedZSetPrefix+postId), userId).Val()
-
+	// 如果这一次投票的值和之前保存一直,就提示不允许重复投票
+	if value == ov {
+		return ErrVoteRepeated
+	}
 	var op float64
 	if value > ov {
 		op = 1
