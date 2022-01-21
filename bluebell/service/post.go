@@ -3,6 +3,7 @@ package service
 import (
 	"bluebell/dao/mysql"
 	"bluebell/dao/redis"
+	"bluebell/models/modelParams"
 	"bluebell/models/modelPost"
 	"bluebell/pkg/snowflake"
 
@@ -63,6 +64,44 @@ func GetPostList(page, size int64) (data []*modelPost.ApiPostDetail, err error) 
 		return
 	}
 	data = make([]*modelPost.ApiPostDetail, 0, len(postList))
+	for _, post := range postList {
+		// 根据作者id查询作者信息
+		user, err := mysql.GetUserById(post.AuthorId)
+		if err != nil {
+			zap.L().Error("mysql.GetUserById(post.AuthorId) failed", zap.Int64("author_id", post.AuthorId), zap.Error(err))
+			continue
+		}
+
+		// 根据社区id查询社区详细信息
+		communityDetail, err := mysql.GetCommunityDetailById(post.CommunityId)
+		if err != nil {
+			zap.L().Error("mysql.GetCommunityDetailById(post.CommunityId)", zap.Int64("community_id", post.CommunityId), zap.Error(err))
+			continue
+		}
+		postDetail := &modelPost.ApiPostDetail{
+			AuthorName:      user.Username,
+			Post:            post,
+			CommunityDetail: communityDetail,
+		}
+		// 添加
+		data = append(data, postDetail)
+
+	}
+	return
+}
+
+// GetPostList2 根据时间很分数获取帖子列表
+func GetPostList2(p *modelParams.ParamPostList) (data []*modelPost.ApiPostDetail, err error) {
+	// 去redis查询id列表
+	ids, err := redis.GetPostIdsOrder(p)
+	if len(ids) == 0 {
+		zap.L().Warn("redis.GetPostIdsOrder(p) return 0 data")
+		return
+	}
+	// 根据postId到数据库中查询 返回的数据还要我提供的id顺序返回数据
+	postList, err := mysql.GetPostListByIds(ids)
+	data = make([]*modelPost.ApiPostDetail, 0, len(postList))
+	//将帖子的作者和分区信息查询的结果查询出来填充到帖子当中
 	for _, post := range postList {
 		// 根据作者id查询作者信息
 		user, err := mysql.GetUserById(post.AuthorId)
