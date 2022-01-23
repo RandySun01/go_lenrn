@@ -24,6 +24,22 @@ import (
 @author RandySun
 @create 2021-12-30-8:50
 */
+
+// @title bluebell
+// @version 1.0
+// @description 清单
+// @termsOfService http://swagger.io/terms/
+
+// @contact.name RandySun
+// @contact.url http://www.swagger.io/support
+// @contact.email support@swagger.io
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host 192.168.0.109:8081
+// @BasePath /api/v1
+
 func main() {
 	var fileName = ""
 	if len(os.Args) < 2 {

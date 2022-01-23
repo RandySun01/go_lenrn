@@ -99,12 +99,23 @@ func GetPostListHandler(c *gin.Context) {
 }
 
 // GetPostListHandler2 升级版帖子列表接口
-// 根据前端传来的参数动态的获取帖子的列表
-// 按照时间排序 或者按照分数排序
-// 1.获取请求query string 参数
-// 2. 去redis查询id列表
-// 3.根据id去数据库查询帖子详细信息
+// @Summary 升级版帖子列表接口
+// @Description 可按社区按时间或分数排序查询帖子列表接口
+// @Tags 帖子相关接口
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string false "Bearer 用户令牌"
+// @Param object query modelParams.ParamPostList false "查询参数"
+// @Security ApiKeyAuth
+// @Success 200 {object} modelDoc._ResponsePostList
+// @Router /postList2 [get]
 func GetPostListHandler2(c *gin.Context) {
+	// GetPostListHandler2 升级版帖子列表接口
+	// 根据前端传来的参数动态的获取帖子的列表
+	// 按照时间排序 或者按照分数排序
+	// 1.获取请求query string 参数
+	// 2. 去redis查询id列表
+	// 3.根据id去数据库查询帖子详细信息
 	// 获取分页参数 /api/v1/posts/?page=1&size=10&order=time
 
 	// 初始化函数结构体时,指定初始化参数

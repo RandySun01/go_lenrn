@@ -18,7 +18,7 @@ func Setup(mode string) *gin.Engine {
 	}
 	r := gin.New()
 	r.Use(logger.GinLogger(), logger.GinRecovery(true))
-
+	SwaggerRouters(r)
 	// 路由
 	VersionRouters(r)
 	// 用户
