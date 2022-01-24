@@ -4,6 +4,7 @@ import (
 	"bluebell/logger"
 	"net/http"
 
+	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,6 +18,8 @@ func Setup(mode string) *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	r := gin.New()
+	// 															每两秒添加一个令牌
+	//r.Use(logger.GinLogger(), logger.GinRecovery(true), middlewares.RateLimitMiddleware(2*time.Second, 1))
 	r.Use(logger.GinLogger(), logger.GinRecovery(true))
 	SwaggerRouters(r)
 	// 路由
@@ -32,6 +35,9 @@ func Setup(mode string) *gin.Engine {
 
 	// 投票
 	VoteRouters(r)
+
+	// 注册pprof相关路由
+	pprof.Register(r)
 	r.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"msg": http.StatusNotFound,
