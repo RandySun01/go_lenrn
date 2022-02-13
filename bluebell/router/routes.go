@@ -21,6 +21,12 @@ func Setup(mode string) *gin.Engine {
 	// 															每两秒添加一个令牌
 	//r.Use(logger.GinLogger(), logger.GinRecovery(true), middlewares.RateLimitMiddleware(2*time.Second, 1))
 	r.Use(logger.GinLogger(), logger.GinRecovery(true))
+	r.LoadHTMLFiles("templates/index.html")
+	r.Static("/static", "./static")
+	r.GET("/", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "index.html", nil)
+
+	})
 	SwaggerRouters(r)
 	// 路由
 	VersionRouters(r)
