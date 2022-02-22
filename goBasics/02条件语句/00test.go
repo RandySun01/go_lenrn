@@ -38,3 +38,6 @@ func main() {
 	fmt.Println(c) //[30 31 33 34 35 36 37]
 
 }
+
+
+
