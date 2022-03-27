@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option go_package = "./;proto";
+package tutorial;
+// protoc -I .\tutorial\ --go_out=plugins=grpc:tutorial .\tutorial\addressbook.proto
+message Person {
+  string name = 1;
+  int32 id = 2;  // Unique ID number for this person.
+  string email = 3;
+
+
+
+}
+
+// Our address book file is just one of these.
+message AddressBook {
+  repeated Person people = 1;
+}
