@@ -35,6 +35,9 @@ func (s *SimpleService) RouteList(srv pb.StreamClient_RouteListServer) error {
 		}
 		// 打印结果
 		log.Println(res.StreamData)
+		// 接收一次就停止接收数据
+		return srv.SendAndClose(&pb.SimpleResponse{Value: "ok"})
+
 	}
 }
 

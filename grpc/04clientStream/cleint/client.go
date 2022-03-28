@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	pb "grpc/04clientStream/proto"
+	"io"
 	"log"
 	"strconv"
 
@@ -33,6 +34,12 @@ func routeList() {
 		err := stream.Send(&pb.StreamRequest{
 			StreamData: "stream client rpc " + strconv.Itoa(n),
 		})
+		// 添加判断服务端是否停止接口数据
+		//发送也要检测EOF，当服务端在消息没接收完前主动调用SendAndClose()关闭stream，此时客户端还执行Send()，则会返回EOF错误，所以这里需要加上io.EOF判断
+		if err == io.EOF {
+			break
+		}
+
 		if err != nil {
 			log.Fatalf("stream request err: %v", err)
 		}
