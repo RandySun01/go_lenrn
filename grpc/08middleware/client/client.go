@@ -7,7 +7,7 @@ import (
 
 	"google.golang.org/grpc/credentials"
 
-	"grpc/07security/pkg/auth"
+	"grpc/08middleware/client/auth"
 
 	"google.golang.org/grpc"
 )
@@ -18,7 +18,7 @@ import (
 */
 
 // Address 连接地址
-const Address string = ":8001"
+const Address string = ":8000"
 
 var grpcClient pb.SimpleClient
 
@@ -30,10 +30,9 @@ func main() {
 	}
 	//构建Token
 	token := auth.Token{
-		AppID:     "grpc_token",
-		AppSecret: "123456",
+		Value: "bearer grpc.auth.token",
 	}
-	// 连接服务器
+	// 连接服务器 grpc.WithTransportCredentials(insecure.NewCredentials())
 	conn, err := grpc.Dial(Address, grpc.WithTransportCredentials(creds), grpc.WithPerRPCCredentials(&token))
 	if err != nil {
 		log.Fatalf("net.Connect err: %v", err)
