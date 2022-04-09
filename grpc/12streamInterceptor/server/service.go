@@ -1,11 +1,13 @@
 package main
 
 import (
-	pb "grpc/05bothStream/proto"
+	"fmt"
+	pb "grpc/12streamInterceptor/proto"
 	"io"
 	"log"
 	"net"
 	"strconv"
+	"time"
 
 	"google.golang.org/grpc"
 )
@@ -22,6 +24,7 @@ type StreamService struct{}
 func (s *StreamService) Conversations(srv pb.Stream_ConversationsServer) error {
 	n := 1
 	for {
+		fmt.Println(1111)
 		req, err := srv.Recv()
 		if err == io.EOF {
 			return nil
@@ -50,6 +53,35 @@ const (
 	Network string = "tcp"
 )
 
+type wrappedStream struct {
+	grpc.ServerStream
+}
+
+func newWrappedStream(s grpc.ServerStream) grpc.ServerStream {
+	return &wrappedStream{s}
+}
+
+func (w *wrappedStream) RecvMsg(m interface{}) error {
+	log.Fatalf("Receive a message (Type: %T) at %s", m, time.Now().Format(time.RFC3339))
+	return w.ServerStream.RecvMsg(m)
+}
+
+func (w *wrappedStream) SendMsg(m interface{}) error {
+	log.Fatalf("Send a message (Type: %T) at %v", m, time.Now().Format(time.RFC3339))
+	return w.ServerStream.SendMsg(m)
+}
+
+func streamInterceptor(srv interface{}, ss grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
+	// 包装 grpc.ServerStream 以替换 RecvMsg SendMsg这两个方法。
+	err := handler(srv, newWrappedStream(ss))
+	if err != nil {
+		log.Fatalf("RPC failed with error %v", err)
+	}
+	log.Fatalf("一个简单的 server stream interceptor 示例")
+
+	return err
+}
+
 func main() {
 	// 监听本地端口
 	listener, err := net.Listen(Network, Address)
@@ -58,7 +90,7 @@ func main() {
 	}
 	log.Println(Address + " net.Listing...")
 	// 新建gRPC服务器实例
-	grpcServer := grpc.NewServer()
+	grpcServer := grpc.NewServer(grpc.StreamInterceptor(streamInterceptor))
 	// 在gRPC服务器注册我们的服务
 	pb.RegisterStreamServer(grpcServer, &StreamService{})
 
