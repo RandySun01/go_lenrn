@@ -1,0 +1,26 @@
+syntax = "proto3";// 协议为proto3
+
+
+package proto;
+//option go_package = "grpc/03serverStream/proto";
+option go_package = "./;proto";
+
+//  protoc --go_out=plugins=grpc:./ .\bothStream.proto
+// 定义我们的服务（可定义多个服务,每个服务可定义多个接口）
+
+service Stream{
+  // 双向流式rpc，同时在请求参数前和响应参数前加上stream
+  rpc Conversations(stream StreamRequest) returns(stream StreamResponse){};
+}
+
+// 定义发送请求信息
+message StreamRequest{
+  //流请求参数
+  string question = 1;
+}
+
+// 定义流式响应信息
+message StreamResponse{
+  //流响应数据
+  string answer = 1;
+}
