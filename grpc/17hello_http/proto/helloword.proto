@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package helloword;
+option go_package = "helloword";
+
+import "google/api/annotations.proto";
+
+/*
+
+protoc -I . --grpc-gateway_out ./ --grpc-gateway_opt logtostderr=true  --grpc-gateway_opt paths=./ --grpc-gateway_opt generate_unbound_methods=true  ./helloword.proto
+protoc -I ./ --go_out ./proto --go_opt paths=source_relative --go-grpc_out ./proto --go-grpc_opt paths=source_relative --grpc-gateway_out ./proto --grpc-gateway_opt paths=source_relative ./helloword.proto
+*/
+//import "google/api/annotations.proto";
+// go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+// 定义Hello服务
+service YourService {
+  // 定义SayHello方法
+  rpc Echo(StringMessage) returns (StringMessage) {
+    // http option
+    option (google.api.http) = {
+      post: "v1/helloword/echo"
+      body: "*"
+    };
+  }
+}
+
+// HelloRequest 请求结构
+message StringMessage {
+  string value = 1;
+}
