@@ -49,6 +49,11 @@ func handle(ctx context.Context, req *pb.SimpleRequest, data chan<- *pb.SimpleRe
 			Code:  200,
 			Value: "hello " + req.Data,
 		}
+		// //修改数据库前进行超时判断
+		// if ctx.Err() == context.Canceled{
+		// 	...
+		// 	//如果已经超时，则退出
+		// }
 		data <- &res
 
 	}

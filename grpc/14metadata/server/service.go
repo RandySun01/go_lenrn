@@ -5,6 +5,7 @@ import (
 	pb "grpc/13manyInterceptor/proto"
 	"log"
 	"net"
+	"time"
 
 	"google.golang.org/grpc/metadata"
 
@@ -20,6 +21,11 @@ import (
 type SimpleService struct {
 }
 
+const (
+	timestampFormat = time.StampNano
+	streamingCount  = 10
+)
+
 // Route 实现Route方法
 func (s *SimpleService) Route(ctx context.Context, req *pb.SimpleRequest) (*pb.SimpleResponse, error) {
 	md, _ := metadata.FromIncomingContext(ctx)
@@ -28,6 +34,10 @@ func (s *SimpleService) Route(ctx context.Context, req *pb.SimpleRequest) (*pb.S
 		Code:  200,
 		Value: "hello " + req.Data,
 	}
+	trailer := metadata.Pairs("timestamp", time.Now().Format(timestampFormat))
+	grpc.SetTrailer(ctx, trailer)
+	header := metadata.New(map[string]string{"location": "MTV", "timestamp": time.Now().Format(timestampFormat)})
+	grpc.SendHeader(ctx, header)
 	return &res, nil
 }
 

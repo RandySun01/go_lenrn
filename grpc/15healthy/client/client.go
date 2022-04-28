@@ -6,7 +6,8 @@ import (
 	pb "grpc/14metadata/proto"
 	"log"
 
-	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/resolver"
+	"google.golang.org/grpc/resolver/manual"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -24,10 +25,31 @@ const (
 	NetWork string = "tcp"
 )
 
+var serviceConfig = `{
+	"loadBalancingPolicy": "round_robin",
+	"healthCheckConfig": {
+		"serviceName": ""
+	}
+}`
+
 func main() {
 	// 连接服务器
+	r := manual.NewBuilderWithScheme("whatever")
+	r.InitialState(resolver.State{
+		Addresses: []resolver.Address{
+			{Addr: "localhost:50051"},
+			{Addr: "localhost:50052"},
+		},
+	})
+	address := fmt.Sprintf("%s:///unused", r.Scheme())
+	options := []grpc.DialOption{
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
+		grpc.WithBlock(),
+		grpc.WithResolvers(r),
+		grpc.WithDefaultServiceConfig(serviceConfig),
+	}
 
-	conn, err := grpc.Dial(Address, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.Dial(address, options...)
 	if err != nil {
 		log.Fatalf("net.Connect connect: %v", err)
 	}
@@ -39,49 +61,15 @@ func main() {
 	req := pb.SimpleRequest{
 		Data: "grpc",
 	}
-	ctx := context.Background()
-	//// 追加自定义字段
-	//newCtx := metadata.AppendToOutgoingContext(ctx, "token", "RandySun")
-
-	md := metadata.New(map[string]string{"go": "programming", "tour": "book"})
-	newCtx := metadata.NewOutgoingContext(ctx, md)
-	// 调用 Route 方法 同时传入context.Context,  在有需要时可以让我们改变RPC的行为，比如超时/取消一个正在运行的RPC
-	var header, trailer metadata.MD
-
-	res, err := grpcClient.Route(newCtx, &req, grpc.Header(&header), grpc.Trailer(&trailer))
-	if err != nil {
-		log.Fatalf("Call Route err:%v", err)
-	}
-	fmt.Println("timestamp from header:\n", header, trailer)
-
-	if t, ok := header["timestamp"]; ok {
-		fmt.Printf("timestamp from header:\n")
-		for i, e := range t {
-			fmt.Printf(" %d. %s\n", i, e)
+	for {
+		res, err := grpcClient.Route(context.Background(), &req)
+		if err != nil {
+			log.Fatalf("Call Route err:%v", err)
 		}
-	} else {
-		log.Fatal("timestamp expected but doesn't exist in header")
-	}
-	if l, ok := header["location"]; ok {
-		fmt.Printf("location from header:\n")
-		for i, e := range l {
-			fmt.Printf(" %d. %s\n", i, e)
-		}
-	} else {
-		log.Fatal("location expected but doesn't exist in header")
-	}
-	fmt.Printf("response:\n")
 
-	if t, ok := trailer["timestamp"]; ok {
-		fmt.Printf("timestamp from trailer:\n")
-		for i, e := range t {
-			fmt.Printf(" %d. %s\n", i, e)
-		}
-	} else {
-		log.Fatal("timestamp expected but doesn't exist in trailer")
-	}
+		// 打印返回直
+		log.Println("服务的返回响应data:", res)
 
-	// 打印返回直
-	log.Println("服务的返回响应data:", res)
+	}
 
 }

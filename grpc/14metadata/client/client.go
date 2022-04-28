@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	pb "grpc/14metadata/proto"
 	"log"
 
@@ -45,9 +46,39 @@ func main() {
 	md := metadata.New(map[string]string{"go": "programming", "tour": "book"})
 	newCtx := metadata.NewOutgoingContext(ctx, md)
 	// 调用 Route 方法 同时传入context.Context,  在有需要时可以让我们改变RPC的行为，比如超时/取消一个正在运行的RPC
-	res, err := grpcClient.Route(newCtx, &req)
+	var header, trailer metadata.MD
+
+	res, err := grpcClient.Route(newCtx, &req, grpc.Header(&header), grpc.Trailer(&trailer))
 	if err != nil {
 		log.Fatalf("Call Route err:%v", err)
+	}
+	fmt.Println("timestamp from header:\n", header, trailer)
+
+	if t, ok := header["timestamp"]; ok {
+		fmt.Printf("timestamp from header:\n")
+		for i, e := range t {
+			fmt.Printf(" %d. %s\n", i, e)
+		}
+	} else {
+		log.Fatal("timestamp expected but doesn't exist in header")
+	}
+	if l, ok := header["location"]; ok {
+		fmt.Printf("location from header:\n")
+		for i, e := range l {
+			fmt.Printf(" %d. %s\n", i, e)
+		}
+	} else {
+		log.Fatal("location expected but doesn't exist in header")
+	}
+	fmt.Printf("response:\n")
+
+	if t, ok := trailer["timestamp"]; ok {
+		fmt.Printf("timestamp from trailer:\n")
+		for i, e := range t {
+			fmt.Printf(" %d. %s\n", i, e)
+		}
+	} else {
+		log.Fatal("timestamp expected but doesn't exist in trailer")
 	}
 
 	// 打印返回直

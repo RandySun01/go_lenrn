@@ -2,12 +2,11 @@ package main
 
 import (
 	"context"
-	"fmt"
 	pb "grpc/14metadata/proto"
 	"log"
+	"time"
 
-	"google.golang.org/grpc/resolver"
-	"google.golang.org/grpc/resolver/manual"
+	"google.golang.org/grpc/keepalive"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -15,7 +14,7 @@ import (
 
 /*
 @author RandySun
-@create 2022-03-27-20:03
+@create 2022-04-10-20:03
 */
 
 const (
@@ -25,31 +24,15 @@ const (
 	NetWork string = "tcp"
 )
 
-var serviceConfig = `{
-	"loadBalancingPolicy": "round_robin",
-	"healthCheckConfig": {
-		"serviceName": ""
-	}
-}`
+var kacp = keepalive.ClientParameters{
+	Time:                10 * time.Second, // send pings every 10 seconds if there is no activity
+	Timeout:             time.Second,      // wait 1 second for ping ack before considering the connection dead
+	PermitWithoutStream: true,             // send pings even without active streams
+}
 
 func main() {
 	// 连接服务器
-	r := manual.NewBuilderWithScheme("whatever")
-	r.InitialState(resolver.State{
-		Addresses: []resolver.Address{
-			{Addr: "localhost:50051"},
-			{Addr: "localhost:50052"},
-		},
-	})
-	address := fmt.Sprintf("%s:///unused", r.Scheme())
-	options := []grpc.DialOption{
-		grpc.WithTransportCredentials(insecure.NewCredentials()),
-		grpc.WithBlock(),
-		grpc.WithResolvers(r),
-		grpc.WithDefaultServiceConfig(serviceConfig),
-	}
-
-	conn, err := grpc.Dial(address, options...)
+	conn, err := grpc.Dial(Address, grpc.WithTransportCredentials(insecure.NewCredentials()), grpc.WithKeepaliveParams(kacp))
 	if err != nil {
 		log.Fatalf("net.Connect connect: %v", err)
 	}
@@ -61,15 +44,16 @@ func main() {
 	req := pb.SimpleRequest{
 		Data: "grpc",
 	}
-	for {
-		res, err := grpcClient.Route(context.Background(), &req)
-		if err != nil {
-			log.Fatalf("Call Route err:%v", err)
-		}
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Minute)
+	defer cancel()
+	res, err := grpcClient.Route(ctx, &req)
 
-		// 打印返回直
-		log.Println("服务的返回响应data:", res)
-
+	if err != nil {
+		log.Fatalf("Call Route err:%v", err)
 	}
+
+	// 打印返回直
+	log.Println("服务的返回响应data:", res)
+	select {} // Block forever; run with GODEBUG=http2debug=2 to observe ping frames and GOAWAYs due to idleness.
 
 }
