@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	pb "grpc/02simpleGrpc/proto"
+	pb "grpc/09protoValidators/proto"
 	"log"
 
 	"google.golang.org/grpc/credentials"
@@ -47,8 +47,9 @@ func main() {
 // route 调用服务端Route方法
 func route() {
 	// 创建发送结构体
-	req := pb.SimpleRequest{
-		Data: "grpc",
+	req := pb.InnerMessage{
+		SomeInteger: 200,
+		SomeFloat:   1,
 	}
 	// 调用我们的服务(Route方法)
 	// 同时传入了一个 context.Context ，在有需要时可以让我们改变RPC的行为，比如超时/取消一个正在运行的RPC

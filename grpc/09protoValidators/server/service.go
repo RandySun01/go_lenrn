@@ -2,13 +2,15 @@ package main
 
 import (
 	"context"
-	pb "grpc/06deadlines/proto"
 	"grpc/08middleware/server/middleware/auth"
 	"grpc/08middleware/server/middleware/cred"
 	"grpc/08middleware/server/middleware/recovery"
 	"grpc/08middleware/server/middleware/zap"
+	pb "grpc/09protoValidators/proto"
 	"log"
 	"net"
+
+	grpc_validator "github.com/grpc-ecosystem/go-grpc-middleware/validator"
 
 	grpc_auth "github.com/grpc-ecosystem/go-grpc-middleware/auth"
 	grpc_recovery "github.com/grpc-ecosystem/go-grpc-middleware/recovery"
@@ -27,17 +29,16 @@ import (
 type SimpleService struct{}
 
 // Route 实现Route方法
-func (s *SimpleService) Route(ctx context.Context, req *pb.SimpleRequest) (*pb.SimpleResponse, error) {
+func (s *SimpleService) Route(ctx context.Context, req *pb.InnerMessage) (*pb.OuterMessage, error) {
 	// 添加拦截器后，方法里省略Token认证
 	// //检测Token是否有效
 	// if err := Check(ctx); err != nil {
 	// 	return nil, err
 	// }
-	res := pb.SimpleResponse{
-		Code:  200,
-		Value: "hello " + req.Data,
+	res := pb.OuterMessage{
+		ImportantString: "hello grpc validator",
+		Inner:           req,
 	}
-	panic("very bad thing happened")
 	return &res, nil
 }
 
@@ -61,6 +62,7 @@ func main() {
 			// grpc_ctxtags.StreamServerInterceptor(),
 			// grpc_opentracing.StreamServerInterceptor(),
 			// grpc_prometheus.StreamServerInterceptor,
+			grpc_validator.StreamServerInterceptor(), // 校验器
 			grpc_zap.StreamServerInterceptor(zap.ZapInterceptor()),
 			grpc_auth.StreamServerInterceptor(auth.AuthInterceptor),
 			grpc_recovery.StreamServerInterceptor(recovery.RecoveryInterceptor()),
@@ -69,6 +71,7 @@ func main() {
 			// grpc_ctxtags.UnaryServerInterceptor(),
 			// grpc_opentracing.UnaryServerInterceptor(),
 			// grpc_prometheus.UnaryServerInterceptor,
+			grpc_validator.UnaryServerInterceptor(), // 校验器
 			grpc_zap.UnaryServerInterceptor(zap.ZapInterceptor()),
 			grpc_auth.UnaryServerInterceptor(auth.AuthInterceptor),
 			grpc_recovery.UnaryServerInterceptor(recovery.RecoveryInterceptor()),

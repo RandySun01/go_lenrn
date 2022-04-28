@@ -8,11 +8,14 @@ syntax = "proto3";// 协议为proto3
 //    protoc -I G:\goproject\src -I ./ --go_out=plugins=grpc:. ./test.proto
 //    https://www.cnblogs.com/yisany/p/14875488.html
 //    protoc -I G:\goproject\src   -I ./ --grpc-gateway_out=logtostderr=true:. .\proto\test.proto
-//    protoc --proto_path=%GOPATH%/src --proto_path=%GOPATH%/src/github.com/google/protobuf/src --proto_path=. --govalidators_out=. --go_out=plugins=grpc:. ./simple.proto
 //    protoc --govalidators_out=. --go_out=plugins=grpc:./ ./simple.proto
+//    protoc -I ./  --govalidators_out=.\09protoValidators\proto\ --go_out=plugins=grpc:.\09protoValidators\proto\  .\09protoValidators\proto\simple.proto
 option go_package = "./;proto";
 package proto;
-import "validator.proto";
+
+// import "github.com/mwitkow/go-proto-validators/validator.proto";
+
+import "09protoValidators/proto/google/validator/validator.proto";
 
 message InnerMessage {
   // some_integer can only be in range (1, 100).
