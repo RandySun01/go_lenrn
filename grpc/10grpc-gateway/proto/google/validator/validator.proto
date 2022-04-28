@@ -13,7 +13,7 @@ package validator;
 //import "google/protobuf/descriptor.proto";
 
 // 修改后
-import "09protoValidators/proto/google/protobuf/descriptor.proto";
+import "10grpc-gateway/proto/google/protobuf/descriptor.proto";
 
 option go_package = "github.com/mwitkow/go-proto-validators;validator";
 

@@ -2,10 +2,19 @@ syntax = "proto3";
 
 package proto;
 
-import "github.com/mwitkow/go-proto-validators/validator.proto";
-import "go-grpc-example/10-grpc-gateway/proto/google/api/annotations.proto";
-import "go-grpc-example/10-grpc-gateway/proto/google/options/annotations.proto";
+// import "github.com/mwitkow/go-proto-validators/validator.proto";
+import "10grpc-gateway/proto/google/validator/validator.proto";
 
+//import "google/api/annotations.proto";
+import "10grpc-gateway/proto/google/api/annotations.proto";
+
+option go_package = "./;proto";
+
+// 生成simple.validator.pb.go和simple.pb.go
+// protoc -I ./  --govalidators_out=.\10grpc-gateway\proto\ --go_out=plugins=grpc:.\10grpc-gateway\proto\  .\10grpc-gateway\proto\simple.proto
+
+// 生成simple.pb.gw.go
+// protoc -I ./ --grpc-gateway_out=logtostderr=true:.\10grpc-gateway\proto\ .\10grpc-gateway\proto\simple.proto
 message InnerMessage {
   // some_integer can only be in range (1, 100).
   int32 some_integer = 1 [(validator.field) = {int_gt: 0, int_lt: 100}];
@@ -20,35 +29,7 @@ message OuterMessage {
   InnerMessage inner = 2 [(validator.field) = {msg_exists : true}];
 }
 
-option (grpc.gateway.protoc_gen_swagger.options.openapiv2_swagger) = {
-  security_definitions: {
-    security: {
-      key: "bearer"
-      value: {
-        type: TYPE_API_KEY
-        in: IN_HEADER
-        name: "Authorization"
-        description: "Authentication token, prefixed by Bearer: Bearer <token>"
-      }
-    }
-  }
 
-  security: {
-    security_requirement: {
-      key: "bearer"
-    }
-  }
-
-  info: {
-		title: "grpc gateway sample";
-		version: "1.0";	
-		license: {
-			name: "MIT";			
-		};
-  }
-
-  schemes: HTTPS
-};
 
 service Simple{
   rpc Route (InnerMessage) returns (OuterMessage){
