@@ -16,13 +16,13 @@ syntax = "proto3";
 
 package google.api;
 
-import "pkg/rpc/google/api/http.proto";
+import "09protoValidators/google/api/http.proto";
 //import "grpcGateway/proto/google/protobuf/descriptor.proto";
 //protoc -I . --go_out=plugins=grpc,Mgoogle/protobuf/descriptor.proto=github.com/golang/protobuf/protoc-gen-go/descriptor:. google/api/*.proto
 
 // protoc -I ./ -I $GOPATH/src -I $GOPATH/src/google/api \
 //	--go_out=plugins=grpc:. ./xxx.proto
-import "pkg/rpc/google/protobuf/descriptor.proto";
+import "09protoValidators/google/protobuf/descriptor.proto";
 
 option go_package = "google.golang.org/genproto/googleapis/api/annotations;annotations";
 option java_multiple_files = true;
