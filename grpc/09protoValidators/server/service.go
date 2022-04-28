@@ -2,11 +2,11 @@ package main
 
 import (
 	"context"
-	"grpc/08middleware/server/middleware/auth"
-	"grpc/08middleware/server/middleware/cred"
-	"grpc/08middleware/server/middleware/recovery"
-	"grpc/08middleware/server/middleware/zap"
 	pb "grpc/09protoValidators/proto"
+	"grpc/09protoValidators/server/middleware/auth"
+	"grpc/09protoValidators/server/middleware/cred"
+	"grpc/09protoValidators/server/middleware/recovery"
+	"grpc/09protoValidators/server/middleware/zap"
 	"log"
 	"net"
 
