@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package proto;
+
+import "google/api/annotations.proto";
+option go_package="./;proto";
+//  protoc  -I G:\goproject\src  -I ./ --go_out=plugins=grpc:. .\proto\simple.proto
+//  protoc -I G:\goproject\src   -I ./ --grpc-gateway_out=logtostderr=true:. .\proto\simple.proto
+//  protoc -I G:\goproject\src   -I ./ --swagger_out=logtostderr=true:./ .\proto\simple.proto
+message InnerMessage {
+  // some_integer can only be in range (1, 100).
+  int32 some_integer = 1 ;
+  // some_float can only be in range (0;1).
+  double some_float = 2 ;
+}
+
+message OuterMessage {
+  // important_string must be a lowercase alpha-numeric of 5 to 30 characters (RE2 syntax).
+  string important_string = 1;
+  // proto3 doesn't have `required`, the `msg_exist` enforces presence of InnerMessage.
+  InnerMessage inner = 2 ;
+}
+
+
+service Simple{
+  rpc Route (InnerMessage) returns (OuterMessage){
+      option (google.api.http) ={
+          post:"/v1/example/route"
+          body:"*"
+      };
+      // //禁用bearer token
+      // option (grpc.gateway.protoc_gen_swagger.options.openapiv2_operation) = {
+      //   security: { } // Disable security key
+      // };
+  }
+}
